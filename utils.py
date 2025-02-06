@@ -5,7 +5,7 @@ R1PROMPT = """A conversation between User and Assistant. The user asks a questio
 The assistant first thinks about the reasoning process in the mind and then provides the user \
 with the answer. The reasoning process and answer are enclosed within <think> </think> and \
 <answer> </answer> tags, respectively, i.e., <think> reasoning process here </think> \
-<answer> answer here </answer>. User: Think carefully and solve the following math problem. Please reason step by step, and put your final answer within \\boxed{{}}. 
+<answer> answer here </answer>. User: Solve the following math problem, whose answer is an integer. Please reason step by step, and put your final answer within \\boxed{{}}.
 {problem} 
 Assistant: <think>\n"""
 
