@@ -7,31 +7,38 @@ import os
 
 SPLIT = "<｜Assistant｜>"
 
-FUSE_PROMPT = """Solve the following math problem. Think creatively, verify carefully and answer directly. The answer should be an integer. 
-```
-{problem}
-```
-Use either of the following methods:
-1. Reason step by step, and put your final answer within \\boxed{{}}. 
-2. You can also leverage a Python program (eg. with sympy) to solve it. Enclose your solution with fenced code block (```python and ```), and print the answer at last.
-"""
+# FUSE_PROMPT = """Solve the following math problem. Think creatively, verify carefully and answer directly. The answer should be an integer. 
+# ```
+# {problem}
+# ```
+# Use either of the following methods:
+# 1. Reason step by step, and put your final answer within \\boxed{{}}. 
+# 2. You can also leverage a Python program (eg. with sympy) to solve it. Enclose your solution with fenced code block (```python and ```), and print the answer at last.
+# """
 
-MATH_PROMPT = """Solve the following math problem. Think creatively, verify carefully and answer directly. The answer should be an integer. 
+EN_PROMPT = """Solve the following AIME math problem. The answer should be an integer. 
 ```
 {problem}
 ```
 Reason step by step, and put your final answer within \\boxed{{}}. 
 """
 
-CODE_PROMPT = """Solve the following math problem. The answer should be an integer. 
+CN_PROMPT = """求解下述奥林匹克竞赛题，最终答案是一个整数。
 ```
 {problem}
 ```
-Leverage a Python program (eg. with sympy) to solve it. Enclose your solution with fenced code block (```python and ```), and print the answer at last.
+请逐步推理，并将最终答案写在 \\boxed{{}} 中。
 """
 
-def format_prompt(tokenizer, problem):
-    chat = [{"role": "user", "content": MATH_PROMPT.format(problem=problem)},]
+CODE_PROMPT = """Leverage a Python program (eg. with sympy) to solve the following math problem algorithmically. The answer should be an integer. 
+```
+{problem}
+```
+Enclose your solution with fenced code block (```python and ```), and print the answer at last.
+"""
+
+def format_prompt(tokenizer, problem, prompt_template):
+    chat = [{"role": "user", "content": prompt_template.format(problem=problem)},]
     prompt = tokenizer.apply_chat_template(
         conversation=chat,
         tokenize=False,
