@@ -69,6 +69,7 @@ def extract_answer(output):
             batcmd = 'timeout 7 ' + sys.executable + f' tmpcode/code_{file_id}.py'
             try:
                 shell_output = subprocess.check_output(batcmd, shell=True).decode('utf8')
+                shell_output = shell_output.strip().split('\n')[-1]
                 code_output = round(float(eval(shell_output))) % 1000
             except:
                 code_output = -1
